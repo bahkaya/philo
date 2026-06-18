@@ -20,6 +20,7 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	death_mutex;
+	pthread_t		waiter_thread;
 	struct s_philo	*philos;
 }	t_data;
 
@@ -49,6 +50,7 @@ int		check_value(char **av);
 t_data	*allocate_data(char **av);
 int		allocate_philos(t_data *data);
 void	*routine(void *all);
+void	*waiter_routine(void *all);
 int		ft_create_thread(t_data *data);
 int		ft_join_philos(t_data *data);
 int		join_threads(t_data *data);
