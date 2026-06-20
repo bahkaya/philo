@@ -2,19 +2,19 @@
 
 int is_dead(t_data *data)
 {
-    int end;
+	int end;
 
-    pthread_mutex_lock(&data->death_mutex);
-    end = data->simulation_end;
-    pthread_mutex_unlock(&data->death_mutex);
-    return end;
+	pthread_mutex_lock(&data->death_mutex);
+	end = data->simulation_end;
+	pthread_mutex_unlock(&data->death_mutex);
+	return (end);
 }
 
 void	printf_status(t_philo *philo, char *status)
 {
-
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%ld %d %s\n", get_current_time() - philo->data->start_time, philo->id, status);
+	if (!is_dead(philo->data))
+		printf("%ld %d %s\n", get_current_time() - philo->data->start_time, philo->id, status);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 int	ft_usleep(size_t milliseconds, t_data *data)
@@ -49,7 +49,15 @@ void	*routine(void *all)
 {
 	t_philo *philo;
 	philo = (t_philo *)all;
+	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_current_time();
+	pthread_mutex_unlock(&philo->meal_mutex);
+	if (philo->data->nb_philos == 1)
+	{
+		printf_status(philo, "has taken left fork");
+		ft_usleep(philo->data->time_to_die, philo->data);
+		return (NULL);
+	}
 	while(!is_dead(philo->data))
 	{
 
@@ -82,29 +90,39 @@ void	*waiter_routine(void *all)
 {
 	t_data	*data;
 	t_philo	*current;
+	int		all_full;
 
 	data = (t_data *)all;
 	usleep(100);
 	while (!is_dead(data))
 	{
 		current = data->philos;
+		all_full = 0;
 		while (current)
 		{
 			pthread_mutex_lock(&current->meal_mutex);
 			if (current->last_meal != 0 && get_current_time() - current->last_meal > data->time_to_die)
 			{
 				pthread_mutex_unlock(&current->meal_mutex);
+				pthread_mutex_lock(&data->print_mutex);
+				printf("%ld %d has died\n", get_current_time() - data->start_time, current->id);
+				pthread_mutex_unlock(&data->print_mutex);
 				pthread_mutex_lock(&data->death_mutex);
 				data->simulation_end = 1;
 				pthread_mutex_unlock(&data->death_mutex);
-				pthread_mutex_lock(&data->print_mutex);
-				if(!data->simulation_end)
-					printf_status(current, "has died");
-				pthread_mutex_unlock(&data->print_mutex);
 				return (NULL);
 			}
+			if (data->must_eat_count != -1 && current->meals_eaten >= data->must_eat_count)
+				all_full++;
 			pthread_mutex_unlock(&current->meal_mutex);
 			current = current->next;
+		}
+		if (data->must_eat_count != -1 && all_full == data->nb_philos)
+		{
+			pthread_mutex_lock(&data->death_mutex);
+			data->simulation_end = 1;
+			pthread_mutex_unlock(&data->death_mutex);
+			return (NULL);
 		}
 		usleep(100);
 	}
