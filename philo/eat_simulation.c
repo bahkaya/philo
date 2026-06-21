@@ -31,7 +31,7 @@ void	printf_status(t_philo *philo, char *status)
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
-static int	philo_eats(t_philo *philo)
+int	philo_eats(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	if (is_dead(philo->data))
@@ -78,7 +78,6 @@ void	*routine(void *all)
 	}
 	return (NULL);
 }
-
 
 void	*third_party_check(void *all)
 {

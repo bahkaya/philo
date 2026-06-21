@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:47:55 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 20:53:02 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 20:58:32 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	philo_cycle_step(t_philo *philo)
 	printf_status(philo, "is sleeping");
 	ft_usleep(philo->data->time_to_sleep, philo->data);
 	printf_status(philo, "is thinking");
-	ft_usleep(philo->data->time_to_die - philo->data->time_to_eat - philo->data->time_to_sleep, philo->data);
+	ft_usleep(philo->data->time_to_die - philo->data->time_to_eat
+		- philo->data->time_to_sleep, philo->data);
 	return (1);
 }
 

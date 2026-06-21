@@ -6,28 +6,30 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:25:04 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 20:54:28 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 21:00:34 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_create_mutexes(t_data *data)
+static int	other_mutexes(t_data *data)
 {
-	int		i;
-	t_philo	*current_philo;
-
-	current_philo = data->philos;
-	i = 0;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
-	if (!data->forks)
-		return (0);
 	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
 		return (0);
 	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
 		return (0);
 	if (pthread_mutex_init(&data->ready_mutex, NULL) != 0)
 		return (0);
+	return (1);
+}
+
+static int	init_philo_mutexes(t_data *data)
+{
+	t_philo	*current_philo;
+	int		i;
+
+	current_philo = data->philos;
+	i = 0;
 	while (i < data->nb_philos)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
@@ -40,6 +42,18 @@ int	ft_create_mutexes(t_data *data)
 			return (0);
 		current_philo = current_philo->next;
 	}
+	return (1);
+}
+
+int	ft_create_mutexes(t_data *data)
+{
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
+	if (!data->forks)
+		return (0);
+	if (!other_mutexes(data))
+		return (0);
+	if (!init_philo_mutexes(data))
+		return (0);
 	return (1);
 }
 

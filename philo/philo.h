@@ -100,4 +100,7 @@ void	ft_death_musteat_check(t_philo *current, int *all_full);
 void	all_have_eaten(t_data *data, int *all_full);
 int		philo_cycle_step(t_philo *philo);
 void	wait_for_all_ready(t_philo *philo);
+int		philo_eats(t_philo *philo);
+int		is_dead(t_data *data);
+void	printf_status(t_philo *philo, char *status);
 #endif
