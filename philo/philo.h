@@ -80,7 +80,7 @@ void	free_data(t_data *data);
 t_data	*allocate_data(char **av);
 int		allocate_philos(t_data *data);
 void	*routine(void *all);
-void	*waiter_routine(void *all);
+void	*third_party_check(void *all);
 int		ft_create_thread(t_data *data);
 int		ft_join_philos(t_data *data);
 size_t	get_current_time(void);

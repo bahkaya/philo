@@ -69,11 +69,12 @@ void	*routine(void *all)
 		printf_status(philo, "is sleeping");
 		ft_usleep(philo->data->time_to_sleep, philo->data);
 		printf_status(philo, "is thinking");
+		ft_usleep(philo->data->time_to_die - philo->data->time_to_eat - philo->data->time_to_sleep, philo->data);
 	}
 	return (NULL);
 }
 
-void	*waiter_routine(void *all)
+void	*third_party_check(void *all)
 {
 	t_data	*data;
 	t_philo	*current;

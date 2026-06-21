@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 10:53:07 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 15:41:57 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 19:28:03 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_atoi_int(const char *str)
 long	ft_atoi_long(const char *str)
 {
 	size_t	i;
-	size_t	value;
+	long	value;
 	int		sign;
 
 	value = 0;

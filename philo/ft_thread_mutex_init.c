@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:25:04 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 14:32:16 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 19:56:47 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_create_thread(t_data *data)
 {
 	t_philo	*current_philo;
 
-	if (pthread_create(&data->waiter_thread, NULL, waiter_routine, data) != 0)
+	if (pthread_create(&data->waiter_thread, NULL, third_party_check, data) != 0)
 		return (0);
 	current_philo = data->philos;
 	while (current_philo)
