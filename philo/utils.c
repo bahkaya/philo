@@ -44,7 +44,7 @@ int	check_av(char **av)
 int	check_value(char **av)
 {
 	size_t	i;
-	size_t	value;
+	long	value;
 
 	i = 0;
 	value = 0;

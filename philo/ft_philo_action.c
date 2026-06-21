@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:47:55 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 15:17:49 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 15:23:39 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_death_musteat_check(t_philo *current, int *all_full)
 	if (current->data->must_eat_count != -1
 		&& current->meals_eaten >= current->data->must_eat_count)
 		*all_full += 1;
-	pthread_mutex_unlock(&current->data->death_mutex);
+	pthread_mutex_unlock(&current->meal_mutex);
 }
 
 int	assign_forks(t_data *data)

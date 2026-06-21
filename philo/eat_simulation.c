@@ -26,7 +26,8 @@ void	printf_status(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
 	if (!is_dead(philo->data))
-		printf("%ld %d %s\n", get_current_time() - philo->data->start_time, philo->id, status);
+		printf("%ld %d %s\n", get_current_time()
+			- philo->data->start_time, philo->id, status);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
