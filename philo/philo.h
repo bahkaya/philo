@@ -1,28 +1,52 @@
-#ifndef PHILO_H
-#define PHILO_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/21 14:27:30 by bahkaya           #+#    #+#             */
+/*   Updated: 2026/06/21 14:27:30 by bahkaya          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <pthread.h>
-#include <string.h>
-#include <sys/time.h>
-#include <limits.h>
+#ifndef PHILO_H
+# define PHILO_H
+
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <pthread.h>
+# include <string.h>
+# include <sys/time.h>
+# include <limits.h>
+
 typedef struct s_data
 {
 	int				nb_philos;
-	long unsigned			time_to_die;
+
+	long unsigned	time_to_die;
+
 	long			time_to_eat;
+
 	long			time_to_sleep;
+
 	int				must_eat_count;
+
 	int				simulation_end;
+
 	long			start_time;
 
 	pthread_mutex_t	*forks;
+
 	pthread_mutex_t	print_mutex;
+
 	pthread_mutex_t	death_mutex;
+
 	pthread_t		waiter_thread;
+
 	struct s_philo	*philos;
+
 }	t_data;
 
 typedef struct s_philo
@@ -38,11 +62,13 @@ typedef struct s_philo
 	pthread_mutex_t	meal_mutex;
 
 	pthread_mutex_t	*left_fork;
+
 	pthread_mutex_t	*right_fork;
 
 	t_data			*data;
-	
+
 	struct s_philo	*next;
+
 }	t_philo;
 
 int		ft_isdigit(int c);

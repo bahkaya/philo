@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:25:04 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 13:33:33 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 14:32:16 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,60 @@
 
 int	ft_create_mutexes(t_data *data)
 {
-	int	i;
-	t_philo *current_philo;
+	int		i;
+	t_philo	*current_philo;
 
 	current_philo = data->philos;
 	i = 0;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
-	if(!data->forks)
+	if (!data->forks)
 		return (0);
-	if(pthread_mutex_init(&data->death_mutex, NULL) != 0)
-		return(0);
-	if(pthread_mutex_init(&data->print_mutex, NULL) != 0)
-		return(0);
-	while(i < data->nb_philos)
+	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+		return (0);
+	while (i < data->nb_philos)
 	{
-		if(pthread_mutex_init(&data->forks[i], NULL) != 0)
-			return(0);
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+			return (0);
 		i++;
 	}
 	while (current_philo)
 	{
-		if(pthread_mutex_init(&current_philo->meal_mutex, NULL) != 0)
-			return(0);
+		if (pthread_mutex_init(&current_philo->meal_mutex, NULL) != 0)
+			return (0);
 		current_philo = current_philo->next;
 	}
-	return(1);
+	return (1);
 }
 
 int	ft_create_thread(t_data *data)
 {
 	t_philo	*current_philo;
 
-	if(pthread_create(&data->waiter_thread, NULL, waiter_routine, data) != 0)
+	if (pthread_create(&data->waiter_thread, NULL, waiter_routine, data) != 0)
 		return (0);
 	current_philo = data->philos;
-	while(current_philo)
+	while (current_philo)
 	{
-		if(pthread_create(&current_philo->thread, NULL, routine, current_philo) != 0)
+		if (pthread_create(&current_philo->thread, NULL,
+				routine, current_philo) != 0)
 			return (0);
 		current_philo = current_philo->next;
 	}
-	return(1);
+	return (1);
 }
 
-int ft_join_philos(t_data *data)
+int	ft_join_philos(t_data *data)
 {
-	t_philo *current;
+	t_philo	*current;
 
-	if(pthread_join(data->waiter_thread, NULL) != 0)
+	if (pthread_join(data->waiter_thread, NULL) != 0)
 		return (0);
 	current = data->philos;
-	while(current)
+	while (current)
 	{
-		if(pthread_join(current->thread, NULL) != 0)
+		if (pthread_join(current->thread, NULL) != 0)
 			return (0);
 		current = current->next;
 	}

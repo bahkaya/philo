@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "limits.h"
+
 int	ft_isdigit(int c)
 {
-	if(c >= 48 && c <= 57)
-		return(1);
+	if (c >= 48 && c <= 57)
+		return (1);
 	else
-		return(0);
+		return (0);
 }
 
 int	check_av(char **av)
@@ -32,14 +32,15 @@ int	check_av(char **av)
 		k = 0;
 		while (av[i][k] != '\0')
 		{
-			if(!ft_isdigit(av[i][k]))
-				return(0);
+			if (!ft_isdigit(av[i][k]))
+				return (0);
 			k++;
 		}
 		i++;
 	}
-	return(1);
+	return (1);
 }
+
 int	check_value(char **av)
 {
 	size_t	i;
@@ -50,8 +51,8 @@ int	check_value(char **av)
 	while (av[i] != NULL)
 	{
 		value = ft_atoi_long(av[i]);
-		if(value == 0 || value > LONG_MAX)
-			return(0);
+		if (value == 0 || value > LONG_MAX)
+			return (0);
 		i++;
 	}
 	return (1);

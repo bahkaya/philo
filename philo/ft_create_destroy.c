@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:48:11 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 13:52:53 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 14:34:40 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +15,7 @@
 static void	philo_next(t_data *data, t_philo *new_philo)
 {
 	t_philo	*current;
- 
+
 	current = new_philo;
 	if (data->philos == NULL)
 		data->philos = new_philo;
@@ -28,7 +27,6 @@ static void	philo_next(t_data *data, t_philo *new_philo)
 		current->next = new_philo;
 	}
 }
-
 
 t_data	*allocate_data(char **av)
 {

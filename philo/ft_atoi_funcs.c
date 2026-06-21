@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 10:53:07 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 10:53:11 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 14:35:18 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int	ft_atoi_int(const char *str)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		if(str[i] == '+')
+		if (str[i] == '+')
 			sign *= 1;
-		else if(str[i] == '-')
+		else if (str[i] == '-')
 			sign *= -1;
 		i++;
 	}
@@ -47,7 +47,7 @@ int	ft_atoi_int(const char *str)
 	return (value * sign);
 }
 
-long ft_atoi_long(const char *str)
+long	ft_atoi_long(const char *str)
 {
 	size_t	i;
 	size_t	value;
@@ -60,9 +60,9 @@ long ft_atoi_long(const char *str)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
-		if(str[i] == '+')
+		if (str[i] == '+')
 			sign *= 1;
-		else if(str[i] == '-')
+		else if (str[i] == '-')
 			sign *= -1;
 		i++;
 	}
