@@ -6,11 +6,24 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:48:11 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 15:50:36 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 17:46:36 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	fork_destroy(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
+	free(data->forks);
+}
 
 static void	philo_next(t_data *data, t_philo *new_philo)
 {
@@ -76,7 +89,6 @@ void	free_data(t_data *data)
 {
 	t_philo	*current;
 	t_philo	*tmp;
-	int		i;
 
 	if (!data)
 		return ;
@@ -89,15 +101,7 @@ void	free_data(t_data *data)
 		current = tmp;
 	}
 	if (data->forks)
-	{
-		i = 0;
-		while (i < data->nb_philos)
-		{
-			pthread_mutex_destroy(&data->forks[i]);
-			i++;
-		}
-		free(data->forks);
-	}
+		fork_destroy(data);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->death_mutex);
 	free(data);

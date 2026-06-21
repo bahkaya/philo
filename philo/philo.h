@@ -89,5 +89,5 @@ int		assign_forks(t_data *data);
 int		ft_usleep(size_t milliseconds, t_data *data);
 size_t	get_current_time(void);
 void	ft_death_musteat_check(t_philo *current, int *all_full);
-
+void	all_have_eaten(t_data *data, int *all_full);
 #endif

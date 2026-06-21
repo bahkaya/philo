@@ -91,13 +91,7 @@ void	*waiter_routine(void *all)
 			ft_death_musteat_check(current, &all_full);
 			current = current->next;
 		}
-		if (data->must_eat_count != -1 && all_full == data->nb_philos)
-		{
-			pthread_mutex_lock(&data->death_mutex);
-			data->simulation_end = 1;
-			pthread_mutex_unlock(&data->death_mutex);
-			return (NULL);
-		}
+		all_have_eaten(data, &all_full);
 		usleep (100);
 	}
 	return (NULL);
