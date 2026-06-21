@@ -49,8 +49,8 @@ int	check_value(char **av)
 	value = 0;
 	while (av[i] != NULL)
 	{
-		value = atoi(av[i]);
-		if(value == 0 || value > INT_MAX)
+		value = ft_atoi_long(av[i]);
+		if(value == 0 || value > LONG_MAX)
 			return(0);
 		i++;
 	}
@@ -65,10 +65,10 @@ t_data	*allocate_data(char **av)
 	if (!data)
 		return (NULL);
 	memset(data, 0, sizeof(t_data));
-	data->nb_philos = atoi(av[1]);
-	data->time_to_die = atol(av[2]);
-	data->time_to_eat = atol(av[3]);
-	data->time_to_sleep = atol(av[4]);
+	data->nb_philos = ft_atoi_int(av[1]);
+	data->time_to_die = ft_atoi_long(av[2]);
+	data->time_to_eat = ft_atoi_long(av[3]);
+	data->time_to_sleep = ft_atoi_long(av[4]);
 	data->must_eat_count = -1;
 	if (av[5])
 		data->must_eat_count = atoi(av[5]);
@@ -109,30 +109,3 @@ int	allocate_philos(t_data *data)
 	}
 	return (1);
 }
-
-/*size_t take_ms(char *s)
-{
-	size_t value;
-	size_t i;
-	int sign;
-	
-	value = 0;
-	i = 0;
-	sign = 1;
-	if (!s)
-		return (0);
-	while (is_whitespace(s[i]))
-		i++;
-	if (s[i] == '-' || s[i] == '+')
-	{
-		if (s[i] == '-' )
-			sign *= -1;
-		i++;
-	}
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		value = value * 10 + s[i] - '0';
-		i++;
-	}
-	return (value * sign);
-}*/

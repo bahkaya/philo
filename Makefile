@@ -2,7 +2,8 @@ NAME			=	philo
 
 SRCS			=	main.c				\
 					utils.c				\
-					eat_simulation.c
+					eat_simulation.c	\
+					ft_atoi_funcs.c		
 
 OBJS			=	$(SRCS:%.c=obj/%.o)
 
@@ -12,7 +13,6 @@ CFLAGS			=	-Wall -Wextra -Werror -pthread
 
 RM				=	rm -f
 
-.PHONY:			all clean fclean re
 
 all:			$(NAME)
 
@@ -30,3 +30,5 @@ fclean:			clean
 				$(RM) $(NAME)
 
 re:				fclean all
+
+.PHONY:			all clean fclean re

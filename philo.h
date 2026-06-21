@@ -7,6 +7,7 @@
 #include <pthread.h>
 #include <string.h>
 #include <sys/time.h>
+#include <limits.h>
 typedef struct s_data
 {
 	int				nb_philos;
@@ -47,6 +48,9 @@ typedef struct s_philo
 int		ft_isdigit(int c);
 int		check_av(char **av);
 int		check_value(char **av);
+int	ft_atoi_int(const char *str);
+long ft_atoi_long(const char *str);
+
 t_data	*allocate_data(char **av);
 int		allocate_philos(t_data *data);
 void	*routine(void *all);

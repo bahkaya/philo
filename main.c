@@ -18,14 +18,18 @@ int main(int ac, char **av)
 	if (ac != 5 && ac != 6)
 	{
 		printf("Error in av \n");
-		return (1); // av control
+		return (1);
 	}
 	if(!check_av(&av[1]))
 	{
 		printf("Error in digits\n");
 		return (1);
 	}
-	check_value(&av[1]);
+	if(!check_value(&av[1]))
+	{
+		printf("Error in values\n");
+		return (1);
+	}
 	data = allocate_data(av);
 	if(!data)
 		return(1);
