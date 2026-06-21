@@ -19,6 +19,7 @@ int	is_dead(t_data *data)
 	pthread_mutex_lock(&data->death_mutex);
 	end = data->simulation_end;
 	pthread_mutex_unlock(&data->death_mutex);
+	printf("end kontrol%d\n", end);
 	return (end);
 }
 
@@ -34,9 +35,9 @@ void	printf_status(t_philo *philo, char *status)
 void	philo_eats(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
-	printf_status(philo, "has taken left fork");
+	printf_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->right_fork);
-	printf_status(philo, "has taken right fork");
+	printf_status(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_current_time();
 	philo->meals_eaten++;
@@ -54,7 +55,7 @@ void	*routine(void *all)
 	pthread_mutex_unlock(&philo->meal_mutex);
 	if (philo->data->nb_philos == 1)
 	{
-		printf_status(philo, "has taken left fork");
+		printf_status(philo, "has taken taken a fork");
 		ft_usleep(philo->data->time_to_die, philo->data);
 		return (NULL);
 	}
