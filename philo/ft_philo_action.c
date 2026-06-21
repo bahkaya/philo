@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:47:55 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 17:46:46 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 17:47:45 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int	assign_forks(t_data *data)
 
 void	all_have_eaten(t_data *data, int *all_full)
 {
-		if (data->must_eat_count != -1 && *all_full == data->nb_philos)
-		{
-			pthread_mutex_lock(&data->death_mutex);
-			data->simulation_end = 1;
-			pthread_mutex_unlock(&data->death_mutex);
-			return ;
-		}
+	if (data->must_eat_count != -1 && *all_full == data->nb_philos)
+	{
+		pthread_mutex_lock(&data->death_mutex);
+		data->simulation_end = 1;
+		pthread_mutex_unlock(&data->death_mutex);
+		return ;
+	}
 }
