@@ -44,11 +44,13 @@ int	check_av(char **av)
 int	check_value(char **av)
 {
 	size_t	i;
+	long	value;
 
 	i = 0;
 	while (av[i] != NULL)
 	{
-		if (ft_atoi_long(av[i]))
+		value = ft_atoi_long(av[i]);
+		if (value < 0)
 			return (0);
 		i++;
 	}
