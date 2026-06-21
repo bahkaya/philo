@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:52:19 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 13:52:26 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 16:56:47 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_usleep(size_t milliseconds, t_data *data)
 {
 	size_t	start;
+	size_t	faster;
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
@@ -26,6 +27,9 @@ int	ft_usleep(size_t milliseconds, t_data *data)
 			return (0);
 		}
 		pthread_mutex_unlock(&data->death_mutex);
+		faster = get_current_time() - data->start_time;
+		if(faster >= milliseconds)
+			break;
 		usleep(500);
 	}
 	return (0);

@@ -40,8 +40,8 @@ void	philo_eats(t_philo *philo)
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_current_time();
 	philo->meals_eaten++;
-	printf_status(philo, "is eating");
 	pthread_mutex_unlock(&philo->meal_mutex);
+	printf_status(philo, "is eating");
 }
 
 void	*routine(void *all)
