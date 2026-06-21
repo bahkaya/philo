@@ -31,17 +31,29 @@ void	printf_status(t_philo *philo, char *status)
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
-void	philo_eats(t_philo *philo)
+static int	philo_eats(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
+	if (is_dead(philo->data))
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		return (0);
+	}
 	printf_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->right_fork);
+	if (is_dead(philo->data))
+	{
+		pthread_mutex_unlock(philo->right_fork);
+		pthread_mutex_unlock(philo->left_fork);
+		return (0);
+	}
 	printf_status(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_current_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	printf_status(philo, "is eating");
+	return (1);
 }
 
 void	*routine(void *all)
@@ -49,6 +61,7 @@ void	*routine(void *all)
 	t_philo	*philo;
 
 	philo = (t_philo *)all;
+	wait_for_all_ready(philo);
 	pthread_mutex_lock(&philo->meal_mutex);
 	philo->last_meal = get_current_time();
 	pthread_mutex_unlock(&philo->meal_mutex);
@@ -60,19 +73,12 @@ void	*routine(void *all)
 	}
 	while (!is_dead(philo->data))
 	{
-		if (is_dead(philo->data))
+		if (!philo_cycle_step(philo))
 			return (NULL);
-		philo_eats(philo);
-		ft_usleep(philo->data->time_to_eat, philo->data);
-		pthread_mutex_unlock(philo->right_fork);
-		pthread_mutex_unlock(philo->left_fork);
-		printf_status(philo, "is sleeping");
-		ft_usleep(philo->data->time_to_sleep, philo->data);
-		printf_status(philo, "is thinking");
-		ft_usleep(philo->data->time_to_die - philo->data->time_to_eat - philo->data->time_to_sleep, philo->data);
 	}
 	return (NULL);
 }
+
 
 void	*third_party_check(void *all)
 {

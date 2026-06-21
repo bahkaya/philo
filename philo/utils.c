@@ -48,7 +48,8 @@ int	check_value(char **av)
 	i = 0;
 	while (av[i] != NULL)
 	{
-		ft_atoi_long(av[i]);
+		if (ft_atoi_long(av[i]))
+			return (0);
 		i++;
 	}
 	return (1);

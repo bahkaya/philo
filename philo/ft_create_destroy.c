@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:48:11 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 17:46:36 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 20:52:46 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	free_data(t_data *data)
 		fork_destroy(data);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->death_mutex);
+	pthread_mutex_destroy(&data->ready_mutex);
 	free(data);
 }

@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:25:04 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 20:25:31 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 20:54:28 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	ft_create_mutexes(t_data *data)
 	if (pthread_mutex_init(&data->death_mutex, NULL) != 0)
 		return (0);
 	if (pthread_mutex_init(&data->print_mutex, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&data->ready_mutex, NULL) != 0)
 		return (0);
 	while (i < data->nb_philos)
 	{
@@ -45,9 +47,6 @@ int	ft_create_thread(t_data *data)
 {
 	t_philo	*current_philo;
 
-	if (pthread_create(&data->waiter_thread, NULL,
-			third_party_check, data) != 0)
-		return (0);
 	current_philo = data->philos;
 	while (current_philo)
 	{
@@ -56,6 +55,11 @@ int	ft_create_thread(t_data *data)
 			return (0);
 		current_philo = current_philo->next;
 	}
+	while (!data->all_ready)
+		usleep(100);
+	if (pthread_create(&data->waiter_thread, NULL,
+			third_party_check, data) != 0)
+		return (0);
 	return (1);
 }
 

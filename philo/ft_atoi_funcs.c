@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 10:53:07 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 19:28:03 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 20:37:26 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_whitespace(char c)
 int	ft_atoi_int(const char *str)
 {
 	size_t	i;
-	size_t	value;
+	int		value;
 	int		sign;
 
 	value = 0;
@@ -39,11 +39,11 @@ int	ft_atoi_int(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		if (value > (INT_MAX - (str[i] - '0')) / 10)
+			return (-1);
 		value = 10 * value + str[i] - '0';
 		i++;
 	}
-	if (value > INT_MAX)
-		return (-1);
 	return (value * sign);
 }
 
@@ -68,10 +68,10 @@ long	ft_atoi_long(const char *str)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		if (value > (LONG_MAX - (str[i] - '0')) / 10)
+			return (-1);
 		value = 10 * value + str[i] - '0';
 		i++;
 	}
-	if (value > LONG_MAX)
-		return (-1);
 	return (value * sign);
 }
