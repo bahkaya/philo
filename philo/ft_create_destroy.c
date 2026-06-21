@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:48:11 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 14:34:40 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 15:50:36 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_data	*allocate_data(char **av)
 	data->time_to_sleep = ft_atoi_long(av[4]);
 	data->must_eat_count = -1;
 	if (av[5])
-		data->must_eat_count = atoi(av[5]);
+		data->must_eat_count = ft_atoi_int(av[5]);
 	data->simulation_end = 0;
 	data->start_time = get_current_time();
 	data->philos = NULL;
