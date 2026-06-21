@@ -19,7 +19,6 @@ int	is_dead(t_data *data)
 	pthread_mutex_lock(&data->death_mutex);
 	end = data->simulation_end;
 	pthread_mutex_unlock(&data->death_mutex);
-	printf("end kontrol%d\n", end);
 	return (end);
 }
 
