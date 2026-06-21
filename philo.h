@@ -48,19 +48,18 @@ typedef struct s_philo
 int		ft_isdigit(int c);
 int		check_av(char **av);
 int		check_value(char **av);
-int	ft_atoi_int(const char *str);
-long ft_atoi_long(const char *str);
-
+int		ft_atoi_int(const char *str);
+long	ft_atoi_long(const char *str);
+void	free_data(t_data *data);
 t_data	*allocate_data(char **av);
 int		allocate_philos(t_data *data);
 void	*routine(void *all);
 void	*waiter_routine(void *all);
 int		ft_create_thread(t_data *data);
 int		ft_join_philos(t_data *data);
-int		join_threads(t_data *data);
 size_t	get_current_time(void);
 int		ft_create_mutexes(t_data *data);
-int	assign_forks(t_data *data);
+int		assign_forks(t_data *data);
 
 
 #endif

@@ -1,9 +1,10 @@
 NAME			=	philo
 
-SRCS			=	main.c				\
-					utils.c				\
-					eat_simulation.c	\
-					ft_atoi_funcs.c		
+SRCS			=	main.c					\
+					utils.c					\
+					eat_simulation.c		\
+					ft_atoi_funcs.c			\
+					ft_create_destroy.c	
 
 OBJS			=	$(SRCS:%.c=obj/%.o)
 

@@ -167,8 +167,16 @@ int	assign_forks(t_data *data)
 	current_philo = data->philos;
 	while(current_philo)
 	{
-		current_philo->left_fork = &data->forks[i];
-		current_philo->right_fork = &data->forks[(i + 1) % data->nb_philos];
+		if (i % 2 == 0)
+		{
+			current_philo->left_fork = &data->forks[i];
+			current_philo->right_fork = &data->forks[(i + 1) % data->nb_philos];
+		}
+		else
+		{
+			current_philo->left_fork = &data->forks[(i + 1) % data->nb_philos];
+			current_philo->right_fork = &data->forks[i];
+		}
 		current_philo = current_philo->next;
 		i++;
 	}
