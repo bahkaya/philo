@@ -1,12 +1,13 @@
 NAME			=	philo
 
-SRCS			=	main.c					\
-					utils.c					\
-					ft_create_destroy.c		\
+SRCS			=	eat_simulation.c		\
 					ft_atoi_funcs.c			\
+					ft_create_destroy.c		\
+					ft_philo_action.c		\
 					ft_thread_mutex_init.c	\
 					ft_time.c				\
-					ft_philo_action.c		\
+					main.c					\
+					utils.c					
 
 OBJS			=	$(SRCS:%.c=obj/%.o)
 
@@ -20,17 +21,21 @@ RM				=	rm -f
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+				@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+				@echo Object Files Created
+				@echo Program Created
 
 obj/%.o:		%.c
 				@mkdir -p obj
-				$(CC) $(CFLAGS) -c $< -o $@
+				@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				$(RM) -r obj
+				@$(RM) -r obj
+				@echo Object Files Deleted
 
 fclean:			clean
-				$(RM) $(NAME)
+				@$(RM) $(NAME)
+				@echo Program Deleted
 
 re:				fclean all
 
