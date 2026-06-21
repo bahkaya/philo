@@ -60,6 +60,8 @@ int		ft_join_philos(t_data *data);
 size_t	get_current_time(void);
 int		ft_create_mutexes(t_data *data);
 int		assign_forks(t_data *data);
-
+int		ft_usleep(size_t milliseconds, t_data *data);
+size_t	get_current_time(void);
+void	ft_death_musteat_check(t_philo *current, int *all_full);
 
 #endif

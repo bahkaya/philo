@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+
 static int philo_check(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
@@ -31,30 +32,36 @@ static int philo_check(int ac, char **av)
 	return (1);
 }
 
-int main(int ac, char **av)
+static int	run_simulation(t_data *data)
 {
-	t_data *data;
-	if(!philo_check(ac , av))
-		return(1);
+	if (!allocate_philos(data))
+		return (0);
+	if (!ft_create_mutexes(data))
+		return (0);
+	if (!assign_forks(data))
+		return (0);
+	if (!ft_create_thread(data))
+		return (0);
+	if (!ft_join_philos(data))
+		return (0);
+	return (1);
+}
+ 
+int	main(int ac, char **av)
+{
+	t_data	*data;
+ 
+	if (!philo_check(ac, av))
+		return (1);
 	data = allocate_data(av);
-	if(!data)
-		return(1);
-	if(!allocate_philos(data))
-		return(1);
-	if(!ft_create_mutexes(data))
-		return(1);
-	if(!assign_forks(data))
-		return(1);
-	if(!ft_create_thread(data))
+	if (!data)
+		return (1);
+	if (!run_simulation(data))
 	{
 		free_data(data);
-		return(1);
-	}
-	if(!ft_join_philos(data))
-	{
-		free_data(data);
-		return(1);
+		return (1);
 	}
 	free_data(data);
-	return(0);
+	return (0);
 }
+ 

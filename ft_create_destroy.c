@@ -7,11 +7,27 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 12:48:11 by bahkaya           #+#    #+#             */
-/*   Updated: 2026/06/21 12:49:21 by bahkaya          ###   ########.fr       */
+/*   Updated: 2026/06/21 13:52:53 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	philo_next(t_data *data, t_philo *new_philo)
+{
+	t_philo	*current;
+ 
+	current = new_philo;
+	if (data->philos == NULL)
+		data->philos = new_philo;
+	else
+	{
+		current = data->philos;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new_philo;
+	}
+}
 
 
 t_data	*allocate_data(char **av)
@@ -39,7 +55,6 @@ int	allocate_philos(t_data *data)
 {
 	int		i;
 	t_philo	*new_philo;
-	t_philo	*current;
 
 	i = 0;
 	while (i < data->nb_philos)
@@ -53,15 +68,7 @@ int	allocate_philos(t_data *data)
 		new_philo->last_meal = 0;
 		new_philo->data = data;
 		new_philo->next = NULL;
-		if (data->philos == NULL)
-			data->philos = new_philo;
-		else
-		{
-			current = data->philos;
-			while (current->next != NULL)
-				current = current->next;
-			current->next = new_philo;
-		}
+		philo_next(data, new_philo);
 		i++;
 	}
 	return (1);

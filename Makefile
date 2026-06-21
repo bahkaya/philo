@@ -2,9 +2,11 @@ NAME			=	philo
 
 SRCS			=	main.c					\
 					utils.c					\
-					eat_simulation.c		\
+					ft_create_destroy.c		\
 					ft_atoi_funcs.c			\
-					ft_create_destroy.c	
+					ft_thread_mutex_init.c	\
+					ft_time.c				\
+					ft_philo_action.c		\
 
 OBJS			=	$(SRCS:%.c=obj/%.o)
 
